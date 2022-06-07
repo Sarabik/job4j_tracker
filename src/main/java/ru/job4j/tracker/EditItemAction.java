@@ -4,7 +4,7 @@ public class EditItemAction implements UserAction {
 
     @Override
     public String name() {
-        return "Delete item";
+        return "Edit item";
     }
 
     @Override
