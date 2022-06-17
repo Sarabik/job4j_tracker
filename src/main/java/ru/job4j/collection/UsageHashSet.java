@@ -6,7 +6,8 @@ import java.util.HashSet;
 public class UsageHashSet {
     public static void main(String[] args) {
         HashSet<String> autos = new HashSet<>();
-        Collections.addAll(autos, "Lada", "BMW", "Volvo", "Toyota");
+        Collections.addAll(autos, "Lada", "BMW", "Volvo", "Toyota", "Lada",
+                "Lada", "Volvo", "Volvo");
         for (String auto : autos) {
             System.out.println(auto);
         }
