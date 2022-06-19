@@ -25,7 +25,6 @@ public class BankService {
             if (!accounts.contains(account)) {
                 accounts.add(account);
             }
-            users.put(user, accounts);
         }
     }
 
@@ -34,6 +33,7 @@ public class BankService {
         for (User user : users.keySet()) {
             if (passport.equals(user.getPassport())) {
                 rsl = user;
+                break;
             }
         }
         return rsl;
@@ -47,6 +47,7 @@ public class BankService {
             for (Account account : accounts) {
                 if (requisite.equals(account.getRequisite())) {
                     userAccount = account;
+                    break;
                 }
             }
         }
