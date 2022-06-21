@@ -19,8 +19,8 @@ public class User {
 
     /**
      * Конструктор класса
-     * @param passport  - номер паспорта
-     * @param username - имя пользователя
+     * @param passport номер паспорта
+     * @param username имя пользователя
      */
     public User(String passport, String username) {
         this.passport = passport;
@@ -29,7 +29,7 @@ public class User {
 
     /**
      * Геттер для номера пасспорта
-     * @return - возвращает номер паспорта
+     * @return возвращает номер паспорта
      */
     public String getPassport() {
         return passport;
@@ -37,7 +37,7 @@ public class User {
 
     /**
      * Сеттер для номера паспорта
-     * @param passport - номер распорта
+     * @param passport номер распорта
      */
     public void setPassport(String passport) {
         this.passport = passport;
@@ -45,7 +45,7 @@ public class User {
 
     /**
      * Геттер для имени пользователя
-     * @return - возвращает имя пользователя
+     * @return возвращает имя пользователя
      */
     public String getUsername() {
         return username;
@@ -53,7 +53,7 @@ public class User {
 
     /**
      * Сеттер для номера паспорта
-     * @param username - имя пользователя
+     * @param username имя пользователя
      */
     public void setUsername(String username) {
         this.username = username;
@@ -61,7 +61,7 @@ public class User {
 
     /**
      * Переопределение метода equals.
-     * @param o - пользователь
+     * @param o пользователь
      * @return  метод возвращает true если номера паспортов
      * пользователей одинаковые. Метод возвращает false если
      * номера паспортов пользователей разные.

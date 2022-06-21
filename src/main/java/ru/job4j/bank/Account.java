@@ -18,8 +18,8 @@ public class Account {
 
     /**
      * Конструктор класса
-     * @param requisite - реквизиты счета
-     * @param balance - баланс счета
+     * @param requisite реквизиты счета
+     * @param balance баланс счета
      */
     public Account(String requisite, double balance) {
         this.requisite = requisite;
@@ -28,7 +28,7 @@ public class Account {
 
     /**
      * Геттер для реквизитов счета
-     * @return - возвращает реквизиты счета
+     * @return возвращает реквизиты счета
      */
     public String getRequisite() {
         return requisite;
@@ -36,7 +36,7 @@ public class Account {
 
     /**
      * Сеттер для реквизитов счета
-     * @param requisite - реквизиты счета
+     * @param requisite реквизиты счета
      */
     public void setRequisite(String requisite) {
         this.requisite = requisite;
@@ -44,7 +44,7 @@ public class Account {
 
     /**
      * Геттер для баланса счета
-     * @return - возвращает баланс счета
+     * @return возвращает баланс счета
      */
     public double getBalance() {
         return balance;
@@ -52,7 +52,7 @@ public class Account {
 
     /**
      * Сеттер для баланса счета
-     * @param balance - баланс счета
+     * @param balance баланс счета
      */
     public void setBalance(double balance) {
         this.balance = balance;
@@ -60,7 +60,7 @@ public class Account {
 
     /**
      * Переопределение метода equals.
-     * @param o - банковский счет пользователя
+     * @param o банковский счет пользователя
      * @return  метод возвращает true если реквизиты счета одинаковые.
      * Метод возвращает false если реквизиты счета разные.
      */

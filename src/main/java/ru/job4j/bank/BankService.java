@@ -19,7 +19,7 @@ public class BankService {
 
     /**
      * Добавление информации о новом пользователе и создание списка его счетов
-     * @param user - пользователь
+     * @param user пользователь
      */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<Account>());
@@ -27,8 +27,8 @@ public class BankService {
 
     /**
      * Добавление нового счета в список счетов пользователя
-     * @param passport - номер паспорта пользователя
-     * @param account - новый счет, который нужно добавить
+     * @param passport номер паспорта пользователя
+     * @param account новый счет, который нужно добавить
      */
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
@@ -42,7 +42,7 @@ public class BankService {
 
     /**
      * Поиск пользователя по его номеру паспорта
-     * @param passport - номер паспорта пользователя
+     * @param passport номер паспорта пользователя
      * @return метод возвращает пользователя либо null (если он не найден)
      */
     public User findByPassport(String passport) {
@@ -58,8 +58,8 @@ public class BankService {
 
     /**
      * Поиск счета пользователя по реквизитам
-     * @param passport - номер паспорта пользователя
-     * @param requisite - реквизиты счета
+     * @param passport номер паспорта пользователя
+     * @param requisite реквизиты счета
      * @return метод возвращает счет либо null (если счет с такими реквизитами не найден)
      */
     public Account findByRequisite(String passport, String requisite) {
@@ -79,11 +79,11 @@ public class BankService {
 
     /**
      * Перечисление указанной денежной суммы с одного счета на другой
-     * @param srcPassport - номер паспорта пользователя, со счета которого необходимо снять деньги
-     * @param srcRequisite - реквизиты счета, с которого необходимо снять деньги
-     * @param destPassport - номер паспорта пользователя, на счет которого необходимо перевести деньги
-     * @param destRequisite - реквизиты счета, на который необходимо перевести деньги
-     * @param amount - денежная сумма перевода
+     * @param srcPassport номер паспорта пользователя, со счета которого необходимо снять деньги
+     * @param srcRequisite реквизиты счета, с которого необходимо снять деньги
+     * @param destPassport номер паспорта пользователя, на счет которого необходимо перевести деньги
+     * @param destRequisite реквизиты счета, на который необходимо перевести деньги
+     * @param amount денежная сумма перевода
      * @return метод возвращает true если операция прошла успешно и false если операция прошла неудачно
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
