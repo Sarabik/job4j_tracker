@@ -1,8 +1,8 @@
 package ru.job4j.stream;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Card {
     private Suit suit;
@@ -13,12 +13,18 @@ public class Card {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "Card{"
+                + "suit=" + suit
+                + ", value=" + value + '}';
+    }
+
     public static void main(String[] args) {
-        List<Suit> suitsList = Arrays.asList(Suit.values());
-        List<Value> valuesList = Arrays.asList(Value.values());
-        List<Card> deck = suitsList.stream()
-                .flatMap(s -> valuesList.stream()
+        List<Card> deck = Stream.of(Suit.values())
+                .flatMap(s -> Stream.of(Value.values())
                         .map(v -> new Card(s, v)))
                 .collect(Collectors.toList());
+        deck.forEach(System.out::println);
     }
 }
