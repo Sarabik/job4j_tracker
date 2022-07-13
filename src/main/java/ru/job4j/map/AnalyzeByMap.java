@@ -1,8 +1,5 @@
 package ru.job4j.map;
 
-import ru.job4j.stream.Subject;
-import ru.job4j.stream.Tuple;
-
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
