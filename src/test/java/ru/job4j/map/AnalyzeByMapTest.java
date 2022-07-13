@@ -5,6 +5,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AnalyzeByMapTest {
+
     @Test
     public void whenSinglePupil() {
         double average = AnalyzeByMap.averageScore(
