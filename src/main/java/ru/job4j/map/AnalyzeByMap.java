@@ -48,7 +48,7 @@ public class AnalyzeByMap {
     public static Label bestSubject(List<Pupil> pupils) {
         return pupils.stream()
                 .flatMap(pupil -> pupil.subjects().stream())
-                .collect(Collectors.groupingBy(Subj::name, LinkedHashMap::new, Collectors.summingDouble(Subj::score)))
+                .collect(Collectors.groupingBy(Subj::name, Collectors.summingDouble(Subj::score)))
                 .entrySet()
                 .stream()
                 .map(entry -> new Label(entry.getKey(), entry.getValue()))
