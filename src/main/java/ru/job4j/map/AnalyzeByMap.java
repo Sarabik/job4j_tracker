@@ -1,58 +1,74 @@
 package ru.job4j.map;
 
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class AnalyzeByMap {
 
     public static double averageScore(List<Pupil> pupils) {
-        return pupils.stream()
-                .flatMap(pupil -> pupil.subjects().stream())
-                .mapToDouble(Subj::score)
-                .average()
-                .orElse(0);
+        double sum = 0;
+        int counter = 0;
+        for (Pupil pupil : pupils) {
+            for (Subj subj : pupil.subjects()) {
+                sum += subj.score();
+                counter++;
+            }
+        }
+        return sum / counter;
     }
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
-        return pupils.stream()
-                .map(pupil -> new Label(pupil.name(),
-                        pupil.subjects().stream()
-                                .mapToDouble(Subj::score)
-                                .average()
-                                .orElse(0)))
-                .collect(Collectors.toList());
+        List<Label> list = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            double sum = 0;
+            for (Subj subj : pupil.subjects()) {
+                sum += subj.score();
+            }
+            list.add(new Label(pupil.name(), sum / pupil.subjects().size()));
+        }
+        return list;
     }
 
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
-        return pupils.stream()
-                .flatMap(pupil -> pupil.subjects().stream())
-                .collect(Collectors.groupingBy(Subj::name, LinkedHashMap::new, Collectors.averagingDouble(Subj::score)))
-                .entrySet()
-                .stream()
-                .map(entry -> new Label(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList());
+        Map<String, Double> temp = new LinkedHashMap<>();
+        List<Label> list = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            for (Subj subj : pupil.subjects()) {
+                temp.computeIfPresent(subj.name(), (k, v) -> v + subj.score());
+                temp.putIfAbsent(subj.name(), (double) subj.score());
+            }
+        }
+        for (Map.Entry<String, Double> entry : temp.entrySet()) {
+            list.add(new Label(entry.getKey(), entry.getValue() / pupils.size()));
+        }
+        return list;
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
-        return pupils.stream()
-                .map(pupil -> new Label(pupil.name(),
-                        pupil.subjects().stream()
-                                .collect(Collectors.summarizingDouble(Subj::score))
-                                .getSum()))
-                .max(Comparator.comparing(Label::score))
-                .orElse(null);
+        List<Label> list = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            double sum = 0;
+            for (Subj subj : pupil.subjects()) {
+                sum += subj.score();
+            }
+            list.add(new Label(pupil.name(), sum));
+        }
+        list.sort(Comparator.comparing(Label::score));
+        return list.get(list.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        return pupils.stream()
-                .flatMap(pupil -> pupil.subjects().stream())
-                .collect(Collectors.groupingBy(Subj::name, Collectors.summingDouble(Subj::score)))
-                .entrySet()
-                .stream()
-                .map(entry -> new Label(entry.getKey(), entry.getValue()))
-                .max(Comparator.comparing(Label::score))
-                .orElse(null);
+        Map<String, Double> temp = new LinkedHashMap<>();
+        List<Label> list = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            for (Subj subj : pupil.subjects()) {
+                temp.computeIfPresent(subj.name(), (k, v) -> v + subj.score());
+                temp.putIfAbsent(subj.name(), (double) subj.score());
+            }
+        }
+        for (Map.Entry<String, Double> entry : temp.entrySet()) {
+            list.add(new Label(entry.getKey(), entry.getValue()));
+        }
+        list.sort(Comparator.comparing(Label::score));
+        return list.get(list.size() - 1);
     }
 }
