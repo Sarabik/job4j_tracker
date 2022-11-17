@@ -38,6 +38,10 @@ public class Item {
         this.name = name;
     }
 
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }
@@ -66,4 +70,5 @@ public class Item {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
 }
