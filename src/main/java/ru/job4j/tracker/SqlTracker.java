@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -57,7 +56,7 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public Item add(Item item) {
         try (PreparedStatement st = cn.prepareStatement(
-                "INSERT INTO Items (name, created) VALUES (?, ?)",
+                "INSERT INTO items (name, created) VALUES (?, ?)",
                 Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, item.getName());
             st.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
@@ -77,7 +76,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public boolean replace(int id, Item item) {
         boolean result = false;
         try (PreparedStatement st = cn.prepareStatement(
-                "UPDATE Items SET name = ?, created = CURRENT_TIMESTAMP WHERE id = ?")) {
+                "UPDATE items SET name = ?, created = CURRENT_TIMESTAMP WHERE id = ?")) {
                 st.setString(1, item.getName());
                 st.setInt(2, id);
                 result = st.executeUpdate() > 0;
@@ -91,7 +90,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public boolean delete(int id) {
         boolean result = false;
         try (PreparedStatement st = cn.prepareStatement(
-                "DELETE FROM Items WHERE id = ?")) {
+                "DELETE FROM items WHERE id = ?")) {
             st.setInt(1, id);
             result = st.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -104,7 +103,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public List<Item> findAll() {
         List<Item> list = new ArrayList<>();
         try (PreparedStatement st = cn.prepareStatement(
-                "SELECT * FROM Items ORDER BY id")) {
+                "SELECT * FROM items ORDER BY id")) {
             try (ResultSet resultSet = st.executeQuery()) {
                 while (resultSet.next()) {
                     list.add(getItemFromResultSet(resultSet));
@@ -120,7 +119,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public List<Item> findByName(String key) {
         List<Item> list = new ArrayList<>();
         try (PreparedStatement st = cn.prepareStatement(
-                "SELECT * FROM Items WHERE name = ? ORDER BY id")) {
+                "SELECT * FROM items WHERE name = ? ORDER BY id")) {
             st.setString(1, key);
             try (ResultSet resultSet = st.executeQuery()) {
                 while (resultSet.next()) {
@@ -137,7 +136,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public Item findById(int id) {
         Item item = null;
         try (PreparedStatement st = cn.prepareStatement(
-                "SELECT * FROM Items WHERE id = ?")) {
+                "SELECT * FROM items WHERE id = ?")) {
             st.setInt(1, id);
             try (ResultSet resultSet = st.executeQuery()) {
                 if (resultSet.next()) {
