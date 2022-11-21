@@ -10,6 +10,13 @@ public class SqlTracker implements Store, AutoCloseable {
 
     private Connection cn;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -25,14 +32,14 @@ public class SqlTracker implements Store, AutoCloseable {
         }
     }
 
-    public void createTable() {
+    /*public void createTable() {
         try (Statement st = cn.createStatement()) {
             st.executeUpdate(String.format("CREATE TABLE if not exists tracker (%s, %s, %s);",
                     "id serial primary key", "name varchar(255)", "created timestamp without time zone"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private Item getItemFromResultSet(ResultSet resultSet) throws SQLException {
         return new Item(resultSet.getInt("id"),

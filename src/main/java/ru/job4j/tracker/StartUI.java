@@ -45,7 +45,6 @@ public class StartUI {
 
         try (SqlTracker tracker = new SqlTracker()) {
             tracker.init();
-            tracker.createTable();
             List<UserAction> actions = Arrays.asList(
                     new CreateAction(output), new ShowAllAction(output), new EditItemAction(output),
                     new DeleteAction(output), new FindByIdAction(output), new FindByNameAction(output),
