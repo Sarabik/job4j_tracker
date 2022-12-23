@@ -37,7 +37,7 @@ public class StartUIMemoryAnalize {
 
         MemTracker tracker = new MemTracker();
         List<UserAction> actions = Arrays.asList(
-                    new AddManyItems(output), new FindManyById(output), new DeleteManyItems(output));
+                    new AddManyItems(output), new FindManyById(output), new DeleteAllItems(output));
         new StartUI(output).init(input, tracker, actions);
     }
 }

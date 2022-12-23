@@ -15,7 +15,7 @@ public class AddManyItems implements UserAction {
     @Override
     public boolean execute(Input input, Store tracker) {
         Item item = null;
-        for (int i = 1; i <= 1000000; i++) {
+        for (int i = 1; i <= 10000000; i++) {
             item = new Item("name" + i);
             tracker.add(item);
             out.println("Добавленная заявка: " + item);
