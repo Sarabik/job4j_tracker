@@ -14,6 +14,6 @@ public class Permission {
 
     private String name;
 
-    @Singular("rules")
+    @Singular("addRule")
     private List<String> rules;
 }

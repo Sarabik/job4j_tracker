@@ -20,8 +20,8 @@ public class LombokUsage {
         Permission permission = Permission.builder()
                 .id(1)
                 .name("name")
-                .rules("rule1")
-                .rules("rule2")
+                .addRule("rule1")
+                .addRule("rule2")
                 .build();
         System.out.println(permission);
     }
