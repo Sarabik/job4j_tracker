@@ -32,23 +32,19 @@ public class HbmTracker implements Store, AutoCloseable {
 
     @Override
     public boolean replace(int id, Item item) {
-        int updates = 0;
+        boolean isReplaced = false;
         Session session = sf.openSession();
         try {
             session.getTransaction();
-             updates = session.createQuery(
-                     "UPDATE Item SET name = :fName, created = :fCreated WHERE id = :fId", Item.class)
-                .setParameter("fName", item.getName())
-                .setParameter("fCreated", item.getCreated())
-                .setParameter("fId", item.getId())
-                .executeUpdate();
-             session.getTransaction().commit();
+            session.update(item);
+            session.getTransaction().commit();
+            isReplaced = true;
         } catch (Exception e) {
             session.getTransaction().rollback();
         } finally {
             session.close();
         }
-        return updates > 0;
+        return isReplaced;
     }
 
     @Override
