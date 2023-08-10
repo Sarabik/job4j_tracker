@@ -35,11 +35,12 @@ public class HbmTracker implements Store, AutoCloseable {
         boolean isReplaced = false;
         Session session = sf.openSession();
         try {
-            session.getTransaction();
+            session.beginTransaction();
             session.update(item);
             session.getTransaction().commit();
             isReplaced = true;
         } catch (Exception e) {
+            e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
             session.close();
