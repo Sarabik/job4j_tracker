@@ -8,7 +8,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class HbmTrackerTest {
-
     @AfterEach
     public void clear() {
         try (HbmTracker tracker = new HbmTracker()) {
