@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -7,6 +8,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class HbmTrackerTest {
+
+    @AfterEach
+    public void clear() {
+        try (HbmTracker tracker = new HbmTracker()) {
+            tracker.findAll().forEach(item -> tracker.delete(item.getId()));
+        }
+    }
 
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
@@ -16,7 +24,6 @@ class HbmTrackerTest {
             int id = item.getId();
             Item result = tracker.findById(item.getId());
             assertThat(result.getName()).isEqualTo(item.getName());
-            tracker.delete(id);
         }
     }
 
@@ -33,7 +40,6 @@ class HbmTrackerTest {
             String result = tracker.findById(id).getName();
 
             assertThat(result).isEqualTo("item333");
-            tracker.delete(id);
         }
     }
 
@@ -50,8 +56,6 @@ class HbmTrackerTest {
             List<String> itemNameList = tracker.findAll().stream().map(Item::getName).toList();
 
             assertThat(itemNameList).contains("item444", "item555");
-            tracker.delete(id1);
-            tracker.delete(id2);
         }
     }
 
@@ -82,8 +86,6 @@ class HbmTrackerTest {
             List<String> result = tracker.findByName("item777").stream().map(Item::getName).toList();
 
             assertThat(result).hasSize(2).contains("item777");
-            tracker.delete(id1);
-            tracker.delete(id2);
         }
     }
 
@@ -97,7 +99,6 @@ class HbmTrackerTest {
             Item result = tracker.findById(id);
 
             assertThat(result.getName()).isEqualTo("item888");
-            tracker.delete(id);
         }
     }
 }

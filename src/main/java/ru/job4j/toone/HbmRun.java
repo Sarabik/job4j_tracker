@@ -25,11 +25,16 @@ public class HbmRun {
             ));
             user.setRole(role);
             create(user, sf);
-            var stored = sf.openSession()
+            int id = user.getId();
+
+            Session session = sf.openSession();
+            User stored = sf.openSession()
                     .createQuery("from User where id = :fId", User.class)
-                    .setParameter("fId", user.getId())
+                    .setParameter("fId", id)
                     .getSingleResult();
+            session.close();
             stored.getMessengers().forEach(System.out::println);
+
         }  catch (Exception e) {
             e.printStackTrace();
         } finally {
